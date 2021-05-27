@@ -58,20 +58,39 @@ public class JpThongKeHoaDon extends javax.swing.JPanel {
             }
             String s1 = String.format("%1$tY-%1$tm-%1$td", d1);
             String s2 = String.format("%1$tY-%1$tm-%1$td", d2);
-            listHd = con.GetHdByDate(s1, s2);
-            if(listHd.size()==0){
+            listHDsorted = con.GetHdByDate(s1, s2);
+            tblHoaDon.setModel(new CustomTable.TableHoaDon(listHDsorted));
+            if(listHDsorted.size()==0){
                 throw new Exception("Không có hóa đơn trong khoảng thời gian này");
             }
-            tblHoaDon.setModel(new CustomTable.TableHoaDon(listHd));
 
-            lbTongHD.setText(listHd.size() + " hóa đơn");
+            lbTongHD.setText(listHDsorted.size() + " hóa đơn");
             double tongtien = 0;
-            for (HoaDonDTO item : listHd) {
+            for (HoaDonDTO item : listHDsorted) {
                 tongtien += item.getTongTien();
             }
             lbTien.setText((tongtien) + " VNĐ");
         }
         catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    public void xemChiTietHoaDon(){
+        try{
+            selectedRow = tblHoaDon.getSelectedRow();
+            if(selectedRow == -1 ){
+                throw new Exception("Hãy chọn 1 dòng trước");
+            }
+            maHD = listHDsorted.get(selectedRow).getMaHoaDon();
+            maBan = listHDsorted.get(selectedRow).getMaBan();
+            gioDen = listHDsorted.get(selectedRow).getGioDen();
+            tongTien = listHDsorted.get(selectedRow).getTongTien();
+            JpChiTietHoaDon cthd = new JpChiTietHoaDon(maHD, maBan, gioDen, tongTien);
+            cthd.setVisible(true);
+            cthd.setLocationRelativeTo(null);
+        }
+        catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
@@ -304,22 +323,7 @@ public class JpThongKeHoaDon extends javax.swing.JPanel {
 
     private void btnChiTietHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietHoaDonActionPerformed
         // TODO add your handling code here:
-        try{
-            selectedRow = tblHoaDon.getSelectedRow();
-            if(selectedRow == -1 ){
-                throw new Exception("Hãy chọn 1 dòng trước");
-            }
-            maHD = listHDsorted.get(selectedRow).getMaHoaDon();
-            maBan = listHDsorted.get(selectedRow).getMaBan();
-            gioDen = listHDsorted.get(selectedRow).getGioDen();
-            tongTien = listHDsorted.get(selectedRow).getTongTien();
-            JpChiTietHoaDon cthd = new JpChiTietHoaDon(maHD, maBan, gioDen, tongTien);
-            cthd.setVisible(true);
-            cthd.setLocationRelativeTo(null);
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        xemChiTietHoaDon();
     }//GEN-LAST:event_btnChiTietHoaDonActionPerformed
 
 
