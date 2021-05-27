@@ -104,7 +104,7 @@ public class JpQuanLyLoaiMonAn extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblLoaiMon);
 
         btnTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/icon-hoc-nau-an-Huong-nghiep-a-au-2015.png"))); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/info.png"))); // NOI18N
         btnTim.setText("Tìm");
         btnTim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTim.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +168,7 @@ public class JpQuanLyLoaiMonAn extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1039, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

@@ -117,7 +117,7 @@ public class JpQuanLyBan extends javax.swing.JPanel {
         });
 
         btnTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/icon-hoc-nau-an-Huong-nghiep-a-au-2015.png"))); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/info.png"))); // NOI18N
         btnTim.setText("Tìm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +168,7 @@ public class JpQuanLyBan extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
