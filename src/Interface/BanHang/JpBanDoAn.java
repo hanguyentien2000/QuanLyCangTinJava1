@@ -27,15 +27,12 @@ public final class JpBanDoAn extends javax.swing.JPanel {
         initComponents();
         bh = this;
         FillBan();
-        jButton2.setBackground(Color.decode("#8080ff"));
-        jButton1.setBackground(Color.decode("#66ff66"));
+        btnTrong.setBackground(Color.decode("#8080ff"));
+        btnDangPhucVu.setBackground(Color.decode("#66ff66"));
     }
-    /**
-     *
-     */
+   
     public void ThuGon(){
         jPanel2.removeAll();
-        jPanel2.add(jLabel1);
         jPanel2.updateUI();        
     }
     
@@ -48,7 +45,7 @@ public final class JpBanDoAn extends javax.swing.JPanel {
                 //Button Bàn
                 btn[i] = new JButton();
                 btn[i].setName(String.valueOf(arrBan.get(i).GetMaBan()));
-                String[] mb = arrBan.get(i).GetTenBan().split(" ");
+                String[] mb = arrBan.get(i).GetTenBan().split(" "); 
                 btn[i].setText(mb[1]);
                 btn[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/ico-Table.png")));
                 Border thickBorder = new LineBorder(Color.WHITE,8);
@@ -60,7 +57,7 @@ public final class JpBanDoAn extends javax.swing.JPanel {
                 if(arrBan.get(i).GetTrangThai().equals("Đang phục vụ")){
                     btn[i].setBackground(Color.decode("#66ff66"));
                 }
-
+                    
                 btn[i].setPreferredSize(new Dimension(90, 70));
                 btn[i].addMouseListener(new MouseAdapter() {
                     
@@ -96,9 +93,9 @@ public final class JpBanDoAn extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jpBan = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnDangPhucVu = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnTrong = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -135,11 +132,11 @@ public final class JpBanDoAn extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTrong, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDangPhucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,8 +160,8 @@ public final class JpBanDoAn extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnTrong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDangPhucVu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,8 +183,8 @@ public final class JpBanDoAn extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnDangPhucVu;
+    private javax.swing.JButton btnTrong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

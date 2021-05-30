@@ -179,11 +179,6 @@ public class DLQL_SuaTaiKhoan extends javax.swing.JDialog {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         try {
-            if (txtUsername.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Username không được để trống");
-                txtUsername.requestFocus();
-                return;
-            }
             if (txtPassword.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Password không được để trống");
                 txtPassword.requestFocus();

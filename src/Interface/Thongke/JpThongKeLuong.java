@@ -7,7 +7,6 @@ package Interface.Thongke;
 
 import CustomTable.TableChamCong;
 import Models.ChamCongDTO;
-import Models.LoaiNhanVienDTO;
 import Models.NhanVienDTO;
 import SQLConnect.ConnectSQL;
 import java.lang.reflect.Array;
@@ -141,14 +140,14 @@ public class JpThongKeLuong extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         cbxMaNV = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        dateChooser1 = new datechooser.beans.DateChooserCombo();
         jLabel7 = new javax.swing.JLabel();
-        dateChooser2 = new datechooser.beans.DateChooserCombo();
         lbNgayCong = new javax.swing.JLabel();
         lbLuongCoBan = new javax.swing.JLabel();
         lbLuongTong = new javax.swing.JLabel();
         btnTinhLuong1 = new javax.swing.JButton();
         btnThanhToanHetLuong = new javax.swing.JButton();
+        dateChooser1 = new datechooser.beans.DateChooserCombo();
+        dateChooser2 = new datechooser.beans.DateChooserCombo();
 
         jLabel12.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 0, 0));
@@ -203,19 +202,7 @@ public class JpThongKeLuong extends javax.swing.JPanel {
 
         jLabel6.setText("Từ ngày:");
 
-        dateChooser1.setCalendarBackground(new java.awt.Color(133, 140, 148));
-        dateChooser1.setCalendarPreferredSize(new java.awt.Dimension(350, 300));
-        dateChooser1.setLocale(new java.util.Locale("vi", "VN", ""));
-        dateChooser1.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11));
-        dateChooser1.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
-
         jLabel7.setText("Đến ngày:");
-
-        dateChooser2.setCalendarBackground(new java.awt.Color(133, 140, 148));
-        dateChooser2.setCalendarPreferredSize(new java.awt.Dimension(350, 300));
-        dateChooser2.setLocale(new java.util.Locale("vi", "VN", ""));
-        dateChooser2.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11));
-        dateChooser2.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
 
         lbNgayCong.setText("...");
 
@@ -236,6 +223,18 @@ public class JpThongKeLuong extends javax.swing.JPanel {
                 btnThanhToanHetLuongActionPerformed(evt);
             }
         });
+
+        dateChooser1.setCalendarBackground(new java.awt.Color(133, 140, 148));
+        dateChooser1.setCalendarPreferredSize(new java.awt.Dimension(350, 300));
+        dateChooser1.setLocale(new java.util.Locale("vi", "VN", ""));
+        dateChooser1.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11));
+        dateChooser1.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
+
+        dateChooser2.setCalendarBackground(new java.awt.Color(133, 140, 148));
+        dateChooser2.setCalendarPreferredSize(new java.awt.Dimension(350, 300));
+        dateChooser2.setLocale(new java.util.Locale("vi", "VN", ""));
+        dateChooser2.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11));
+        dateChooser2.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -281,9 +280,9 @@ public class JpThongKeLuong extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(cbxMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -301,19 +300,20 @@ public class JpThongKeLuong extends javax.swing.JPanel {
                             .addComponent(lbLuongTong))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                            .addComponent(dateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                            .addComponent(dateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThanhToanHetLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTinhLuong1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(212, 212, 212))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(133, 133, 133))))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 

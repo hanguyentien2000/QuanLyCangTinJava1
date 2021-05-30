@@ -5,7 +5,6 @@
  */
 package Interface.BanHang;
 
-import Interface.Run;
 import Models.BanDTO;
 import Models.DsOrder;
 import Models.HoaDonDTO;
@@ -41,7 +40,7 @@ public final class JpGoiDo extends javax.swing.JPanel {
     HoaDonDTO arrHoaDon;
     NumberFormat Cash = new DecimalFormat("#,###,###");
     ArrayList<DsOrder> Orders;
-    ArrayList<HoaDonDTO> Bill;
+
     public static JpGoiDo Goimon;
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm a");
 
@@ -159,11 +158,6 @@ public final class JpGoiDo extends javax.swing.JPanel {
         jpThongTinThanhToan.setBackground(Color.decode("#e6e6e6"));
         jpThongTinThanhToan.setAutoscrolls(true);
         jpThongTinThanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpThongTinThanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jpThongTinThanhToanMousePressed(evt);
-            }
-        });
 
         lbTongTien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbTongTien.setForeground(new java.awt.Color(255, 0, 0));
@@ -312,27 +306,22 @@ public final class JpGoiDo extends javax.swing.JPanel {
     public void fillThongTin() {
         arrHoaDon = con.GetHDbyMaBan(MaBan);
         MaHD = arrHoaDon.getMaHoaDon();
-        int ck = con.CheckDsMon(MaHD, MaBan);
         btnGoiMon.setVisible(true);
-        if (ck == 0) {
-            HuyHD();
-            btnGoiMon.setVisible(false);
-        }
+
         if (Tienmon <= 0) {
             Tongtien = 0;
             lbTongTien.setText("0 VNĐ");
         } else {
             Tongtien = Tienmon;
             lbTongTien.setText(String.valueOf(Cash.format(Tongtien)) + " VNĐ");
-//            txtGhiChu.setText(arrHoaDon.getGhiChu());
         }         
     }
 
     public void fillDsMon(int mahd) {
         //Hiển thị hoá đơn sau khi chọn món lên màn hình
         if (mahd != 0) {
-            Orders = con.GetDsOrder(mahd);
-            arrHoaDon = con.GetHDbyMaBan(MaBan);
+            Orders = con.GetDsOrder(mahd);// get all thông tin từ bảng món và bảng chi tiết hoá đơn
+            arrHoaDon = con.GetHDbyMaBan(MaBan);// lấy tất cả những hoá đơn đã có mã bàn và trạng thái = 0 
             Tienmon = 0;
         }
         mahd = MaHD;
@@ -346,6 +335,7 @@ public final class JpGoiDo extends javax.swing.JPanel {
             jpDsMon.setLayout(new BoxLayout(jpDsMon, BoxLayout.Y_AXIS));
             for (int i = 0; i < Orders.size(); i++) {
                 Tienmon += Orders.get(i).getDonGia()* Orders.get(i).getSoLuong();
+                
                 //panel chi tiết món
                 pn[i] = new JPanel();
                 pn[i].setName(Integer.toString(Orders.get(i).getMaMon()));
@@ -357,7 +347,7 @@ public final class JpGoiDo extends javax.swing.JPanel {
                 pn[i].setMaximumSize(new Dimension(270, 50));
                 pn[i].setMinimumSize(new Dimension(270, 50));
                 
-                //Fill information món
+                //Fill thong tin món
                 pn[i].add(new JLabel(Orders.get(i).getTenMon(), JLabel.CENTER)).setForeground(Color.decode("#001a66"));
                 pn[i].add(new JLabel(String.valueOf(Cash.format(Orders.get(i).getDonGia())) + " VNĐ", JLabel.CENTER)).setForeground(Color.decode("#ff0000"));
                 pn[i].add(new JLabel(String.valueOf(Orders.get(i).getSoLuong()) + " " + Orders.get(i).getdVT(), JLabel.RIGHT)).setForeground(Color.decode("#008000"));
@@ -400,7 +390,6 @@ public final class JpGoiDo extends javax.swing.JPanel {
                 jpDsMon.updateUI();
 
             }
-          
             fillThongTin();
         }
     }
@@ -435,13 +424,13 @@ public final class JpGoiDo extends javax.swing.JPanel {
     private void btnGoiMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoiMonActionPerformed
         if (btnGoiMon.getText().equals("Hủy bàn")) {
             jpThucDon.removeAll();
-            jpThucDon.add(jLabel1);
             jpThucDon.updateUI();
             jpThongTinThanhToan.setVisible(false);
             btnThuGon.setVisible(true);
             lbGioDen.setText("......");
             lbTrangThai.setText("Trống");
             String TrangThai = "Trống";
+            
             BanDTO b = new BanDTO(MaBan, lbTenBan.getText(), TrangThai);
             int Update = con.UpdateBan(b);
             JpBanDoAn.bh.FillBan();
@@ -450,7 +439,7 @@ public final class JpGoiDo extends javax.swing.JPanel {
 
         }
         if (btnGoiMon.getText().equals("Thanh toán")) {
-            DLThanhToan thanhtoan = new DLThanhToan(Tongtien, TenBan, MaBan, MaHD);//tongtien trang thai ban ten ban
+            DLThanhToan thanhtoan = new DLThanhToan(Tongtien, TenBan, MaBan, MaHD);
             thanhtoan.setLocationRelativeTo(null);
             thanhtoan.setVisible(true);
             return;
@@ -479,10 +468,6 @@ public final class JpGoiDo extends javax.swing.JPanel {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGoiMonActionPerformed
-
-    private void jpThongTinThanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpThongTinThanhToanMousePressed
-//        // TODO add your handling code here:
-    }//GEN-LAST:event_jpThongTinThanhToanMousePressed
 
     private void btnThuGonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuGonActionPerformed
         JpBanDoAn.bh.ThuGon();

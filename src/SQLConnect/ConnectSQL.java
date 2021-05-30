@@ -641,11 +641,8 @@ public class ConnectSQL {
 
     public int ThanhToan(HoaDonDTO hd) {
         int update = 0;
-//        String sql = "UPDATE hoadon SET TongTien = '" + hd.getTongTien() + "', TrangThai = 1 WHERE MaHD = " + hd.getMaHoaDon() + "";  
         String sql = "Update HoaDon set TongTien = ?, TrangThai = 1 Where MaHD = ?";
         try {
-//            Statement st = con.createStatement();
-//            update = st.executeUpdate(sql);
             pst = con.prepareStatement(sql);
             setParameters(pst, hd.getTongTien(), hd.getMaHoaDon());
             update = pst.executeUpdate();
@@ -657,17 +654,13 @@ public class ConnectSQL {
 
     public int InsertHoaDon(HoaDonDTO hd, Timestamp gio) {
         int insert = 0;
-//        String sql = "Insert into HoaDon (MaBan, GioDen ,TrangThai, TongTien) values (" + hd.getMaBan() + ", '" + gio + "', N'" + hd.getGhiChu() + "' , " + hd.getTrangThai() + "," + hd.getTongTien() + ")";
         String sql = "Insert into HoaDon values(?, ? ,? ,?)";
         try {
-//            Statement st = con.createStatement();
-//            insert = st.executeUpdate(sql);
             pst = con.prepareStatement(sql);
             setParameters(pst, hd.getMaBan(), gio, hd.getTrangThai(), hd.getTongTien());
             insert = pst.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Thêm hoá đơn không thành công!");
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return insert;
     }
@@ -951,7 +944,6 @@ public class ConnectSQL {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không lấy được danh sách nhân viên !");
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return arrNV;
     }

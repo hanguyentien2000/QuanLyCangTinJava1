@@ -6,7 +6,6 @@
 package Interface.BanHang;
 
 import CustomTable.TableGoiMon;
-import Interface.Run;
 import Models.LoaiMonAnDTO;
 import Models.MonAnDTO;
 import SQLConnect.ConnectSQL;
@@ -36,7 +35,7 @@ public class JpDoAn extends javax.swing.JPanel {
     public Timestamp gioden;
     public String tenban;
     public int maban;
-    public ArrayList<MonAnDTO> arrdsmon;
+//    public ArrayList<MonAnDTO> arrdsmon;
     ArrayList<MonAnDTO> arrThucDon;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
     public static JpDoAn td = new JpDoAn();

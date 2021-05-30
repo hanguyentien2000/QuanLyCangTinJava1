@@ -40,7 +40,6 @@ public class DLSoLuong extends javax.swing.JDialog {
      * @param MaBan
      */
     public DLSoLuong( int MaMon, String Tenban, int MaBan) {
-
         initComponents();
         Mamon = MaMon;
         TenBan = Tenban;

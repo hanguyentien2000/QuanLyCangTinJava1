@@ -292,24 +292,36 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
+        String regexVietnamese = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
+                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
+                + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
+        String regexSDT = "^[0-9]*$";
         try {
             if (txtHoTen.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Họ tên không được để trống !");
                 return;
             }
             if (txtSDT.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "SDT không được để trống !");
+                JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống !");
+                return;
+            }
+            if (!txtHoTen.getText().trim().matches(regexVietnamese)) {
+                JOptionPane.showMessageDialog(null, "Họ tên nhân viên không được chứa kí tự đặc biệt hoặc số~");
+                return;
+            }
+            if (!txtSDT.getText().trim().matches(regexSDT)) {
+                JOptionPane.showMessageDialog(null, "Số điện thoại chỉ được chứa số !!");
                 return;
             }
             if (txtDiaChi.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
                 return;
             }
-          
             if (!rdNam.isSelected() && !rdNu.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Chưa chọn giới tính");
                 return;
             }
+            
             NhanVienDTO nv = new NhanVienDTO();
             nv.setMaNV(StoreData.currentNhanVien.getMaNV());
             nv.setHoTen(txtHoTen.getText());

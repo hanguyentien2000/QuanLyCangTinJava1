@@ -45,7 +45,6 @@ public class JpQuanLyNhanVien extends javax.swing.JPanel {
                 loadData();
             }
         });
-        
         loadData();
         loadTable();
     }
@@ -294,7 +293,6 @@ public class JpQuanLyNhanVien extends javax.swing.JPanel {
                 else{
                     throw new Exception("Nhân viên này chưa thanh toán hết lương !!!!");
                 }
-
             } else {
             }
             selectedRow = -1;
