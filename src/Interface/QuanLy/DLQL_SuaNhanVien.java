@@ -294,7 +294,7 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
         String regexVietnamese = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
                 + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
                 + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
-        String regexSDT = "^[0-9]*$";
+        String regexSDT = "^[0-9]+$";
         try {
             if (txtHoTen.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Họ tên không được để trống !");

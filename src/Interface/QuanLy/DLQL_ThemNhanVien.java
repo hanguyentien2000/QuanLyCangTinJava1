@@ -284,7 +284,7 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
         String regexVietnamese = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
                 + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
                 + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
-        String regexSDT = "^[0-9]*$";
+        String regexSDT = "^[0-9]+$";
         try {
             if (txtMaNV.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Mã NV không được để trống !");
