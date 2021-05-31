@@ -143,7 +143,7 @@ public class ConnectSQL {
         if (tenloai.trim().equals("")) {
             sql = "select *from DanhMucMonAn";
         } else {
-            sql = "Select * From DanhMucMonAn Where TenLoai LIKE N'" + tenloai + "%'";
+            sql = "Select * From DanhMucMonAn Where TenLoai LIKE N'%" + tenloai + "%'";
         }
         try {
             Statement st = con.createStatement();
@@ -263,7 +263,7 @@ public class ConnectSQL {
         if (tenban.trim().equals("")) {
             sql = "Select * from Ban";
         } else {
-            sql = "Select * From Ban Where TenBan LIKE N'" + tenban + "%'";
+            sql = "Select * From Ban Where TenBan LIKE N'%" + tenban + "%'";
         }
         try {
             Statement st = con.createStatement();
@@ -366,7 +366,6 @@ public class ConnectSQL {
         try {
             Statement st = con.createStatement();
             insert = st.executeUpdate(sql);
-//            StoreData.dsMon.add(td);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Không thêm được món ăn!");
         }
@@ -391,7 +390,7 @@ public class ConnectSQL {
         if (tenmon.trim().equals("")) {
             sql = "Select * From MonAn";
         } else {
-            sql = "Select * From MonAn Where TenMon LIKE N'" + tenmon + "%'";
+            sql = "Select * From MonAn Where TenMon LIKE N'%" + tenmon + "%'";
         }
         try {
             Statement st = con.createStatement();
@@ -857,7 +856,7 @@ public class ConnectSQL {
         if (username.trim().equals("")) {
             sql = "Select * from TaiKhoan";
         } else {
-            sql = "Select * From TaiKhoan Where Username LIKE '" + username + "%'";
+            sql = "Select * From TaiKhoan Where Username LIKE '%" + username + "%'";
 
         }
         try {
@@ -1121,7 +1120,7 @@ public class ConnectSQL {
         if (tennv.trim().equals("")) {
             sql = "select *From NhanVien";
         } else {
-            sql = "Select * From NhanVien Where HoTen LIKE N'" + tennv + "%'";
+            sql = "Select * From NhanVien Where HoTen LIKE N'%" + tennv + "%'";
         }
         try {
             Statement st = con.createStatement();
