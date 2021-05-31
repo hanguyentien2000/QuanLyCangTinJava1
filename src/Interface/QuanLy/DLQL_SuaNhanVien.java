@@ -9,7 +9,6 @@ import Models.LoaiNhanVienDTO;
 import Models.NhanVienDTO;
 import SQLConnect.ConnectSQL;
 import Store.StoreData;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -284,7 +283,7 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -293,7 +292,7 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         String regexVietnamese = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
-                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
+                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
                 + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
         String regexSDT = "^[0-9]*$";
         try {
@@ -306,22 +305,23 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
                 return;
             }
             if (!txtHoTen.getText().trim().matches(regexVietnamese)) {
-                JOptionPane.showMessageDialog(null, "Họ tên nhân viên không được chứa kí tự đặc biệt hoặc số~");
+                JOptionPane.showMessageDialog(null, "Họ tên nhân viên không được chứa kí tự đặc biệt hoặc số !");
                 return;
             }
             if (!txtSDT.getText().trim().matches(regexSDT)) {
-                JOptionPane.showMessageDialog(null, "Số điện thoại chỉ được chứa số !!");
+                JOptionPane.showMessageDialog(null, "Số điện thoại chỉ được chứa số và không có quá 10 chữ số!");
                 return;
             }
             if (txtDiaChi.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
                 return;
             }
-            if (!rdNam.isSelected() && !rdNu.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Chưa chọn giới tính");
-                return;
+            int tuoi = new Date(System.currentTimeMillis() - dateNgaysinh.getSelectedDate().getTimeInMillis()).getYear() - 
+                    new Date(dateNgaysinh.getSelectedDate().getTimeInMillis() - dateNgaysinh.getSelectedDate().getTimeInMillis()).getYear(); //70
+
+            if(tuoi < 18){
+                throw new Exception("Nhân viên phải đạt 18 tuổi trở lên");
             }
-            
             NhanVienDTO nv = new NhanVienDTO();
             nv.setMaNV(StoreData.currentNhanVien.getMaNV());
             nv.setHoTen(txtHoTen.getText());
@@ -335,7 +335,7 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
             nv.setLuongCoBan(Integer.parseInt(txtLuongCoBan.getText()));
             int MaLoai = cbbLoaiNV.get(cbxLoai.getSelectedIndex()).getMaLoaiNV();
             nv.setMaLoaiNV(MaLoai);
-//            nv.setTrangThai(cbxStatus.getSelectedIndex() == 0);
+
             if (rdNam.isSelected()) {
                 nv.setGioitinh("Nam");
             }
@@ -347,10 +347,8 @@ public class DLQL_SuaNhanVien extends javax.swing.JDialog {
             JpQuanLyNhanVien.nv.loadData();
             JpQuanLyNhanVien.nv.updateUI();
             this.dispose();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Số điện thoại sai định dạng!");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btnXacNhanActionPerformed
 

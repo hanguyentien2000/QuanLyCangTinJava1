@@ -10,8 +10,10 @@ import Models.NhanVienDTO;
 import SQLConnect.ConnectSQL;
 import Store.StoreData;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -280,7 +282,7 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         String regexVietnamese = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
-                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
+                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
                 + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
         String regexSDT = "^[0-9]*$";
         try {
@@ -297,11 +299,11 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
                 return;
             }
             if (!txtHoTen.getText().trim().matches(regexVietnamese)) {
-                JOptionPane.showMessageDialog(null, "Họ tên nhân viên không được chứa kí tự đặc biệt hoặc số~");
+                JOptionPane.showMessageDialog(null, "Họ tên nhân viên không được chứa kí tự đặc biệt hoặc số !");
                 return;
             }
             if (!txtSDT.getText().trim().matches(regexSDT)) {
-                JOptionPane.showMessageDialog(null, "Số điện thoại chỉ được chứa số !!");
+                JOptionPane.showMessageDialog(null, "Số điện thoại chỉ được chứa số và không có quá 10 chữ số !");
                 return;
             }
             if (txtDiaChi.getText().isEmpty()) {
@@ -316,12 +318,17 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Mã NV đã tồn tại");
                 return;
             }
+            int tuoi = new Date(System.currentTimeMillis() - dateNgaysinh.getSelectedDate().getTimeInMillis()).getYear()
+                    - new Date(dateNgaysinh.getSelectedDate().getTimeInMillis() - dateNgaysinh.getSelectedDate().getTimeInMillis()).getYear(); //70
+
+            if (tuoi < 18) {
+                throw new Exception("Nhân viên phải đạt 18 tuổi trở lên");
+            }
 
             NhanVienDTO nv = new NhanVienDTO();
             nv.setHoTen(txtHoTen.getText());
             nv.setDiaChi(txtDiaChi.getText());
             nv.setMaNV(txtMaNV.getText());
-            
             Calendar cd = dateNgaysinh.getSelectedDate();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String ngay = df.format(cd.getTime());
@@ -330,7 +337,7 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
             int MaLoai = cbbLoaiNV.get(cbxLoai.getSelectedIndex()).getMaLoaiNV();
             nv.setMaLoaiNV(MaLoai);
             nv.setLuongCoBan(Integer.parseInt(txtLuongCoBan.getText()));
-            
+
             if (rdNam.isSelected()) {
                 nv.setGioitinh("Nam");
             }
@@ -338,16 +345,12 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
                 nv.setGioitinh("Nữ");
             }
             int Insert = con.InsertNhanVien(nv);
-            if (Insert == 0) {
-                return;
-            } else {
-                StoreData.dsNV = con.GetAllNhanVien();
-            }
+            StoreData.dsNV = con.GetAllNhanVien();
             JpQuanLyNhanVien.nv.loadData();
             JpQuanLyNhanVien.nv.updateUI();
             this.dispose();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Create failed");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_btnXacNhanActionPerformed
