@@ -9,6 +9,7 @@ import CustomTable.TableChamCong;
 import Models.ChamCongDTO;
 import Models.NhanVienDTO;
 import SQLConnect.ConnectSQL;
+import Store.StoreData;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +22,6 @@ import javax.swing.JOptionPane;
  */
 public class JpThongKeLuong extends javax.swing.JPanel {
     ArrayList<ChamCongDTO> listCC = new ArrayList<>();
-    ArrayList<NhanVienDTO> listNV = new ArrayList<>();
     ConnectSQL con = new ConnectSQL();
     int selectedRow = -1;
     int luongCB = 0;
@@ -38,15 +38,14 @@ public class JpThongKeLuong extends javax.swing.JPanel {
 
     public void loadCombo() {
         try{
-            listNV = con.GetAllNhanVien();
-            if (listNV.size()==0) {
+            if (StoreData.dsNV.size()==0) {
                 throw new Exception("KHÔNG có mã nhân viên nào !!!");
             }
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             cbxMaNV.setModel(model);
-            for(int i=0; i<listNV.size(); i++){
-                if(!listNV.get(i).getMaNV().trim().equals("BOSS")){
-                cbxMaNV.addItem(listNV.get(i).getMaNV());}
+            for(int i=0; i<StoreData.dsNV.size(); i++){
+                if(!StoreData.dsNV.get(i).getMaNV().trim().equals("BOSS")){
+                cbxMaNV.addItem(StoreData.dsNV.get(i).getMaNV());}
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -62,24 +61,26 @@ public class JpThongKeLuong extends javax.swing.JPanel {
         s1 = String.format("%1$tY-%1$tm-%1$td", d1);
         s2 = String.format("%1$tY-%1$tm-%1$td", d2);
         
+        lbNgayCong.setText("...");
+        lbLuongTong.setText("...");
+        
+        ArrayList<ChamCongDTO> listCCByMaNV = con.GetChamCongByDate(maNV, s1, s2);
+        tblLuong.setModel(new TableChamCong(listCCByMaNV));
+        
         if(d1.after(d2)){
             throw new Exception("Ngày bắt đầu phải nhỏ hơn Ngày kết thúc");
         }
-        ArrayList<ChamCongDTO> listByDate = con.GetChamCongByDate(maNV, s1, s2);
-        if(listByDate.size() == 0){
+        if(listCCByMaNV.size() == 0){
             throw new Exception("Không có ngày làm trong khoảng này");
         }
         else{
-            for(int i=0; i<listByDate.size(); i++){
+            for(int i=0; i<listCCByMaNV.size(); i++){
                 soBuoi ++;
             }
         }
         lbNgayCong.setText(Integer.toString(soBuoi));
         tongLuong = soBuoi * luongCB;
         lbLuongTong.setText(Integer.toString(tongLuong));
-        
-        ArrayList<ChamCongDTO> listCCByMaNV = con.GetChamCongByDate(maNV, s1, s2);
-        tblLuong.setModel(new TableChamCong(listCCByMaNV));
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -117,6 +118,7 @@ public class JpThongKeLuong extends javax.swing.JPanel {
     
     public JpThongKeLuong() {
         initComponents();
+        StoreData.dsNV = con.GetAllNhanVien();
         loadCombo();
     }
 
@@ -320,9 +322,9 @@ public class JpThongKeLuong extends javax.swing.JPanel {
     private void cbxMaNVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMaNVItemStateChanged
         // TODO add your handling code here:
         maNV = cbxMaNV.getSelectedItem().toString();
-        for(int i=0; i<listNV.size(); i++){
-            if(listNV.get(i).getMaNV().trim().equals(maNV.trim())){
-                luongCB = listNV.get(i).getLuongCoBan();
+        for(int i=0; i<StoreData.dsNV.size(); i++){
+            if(StoreData.dsNV.get(i).getMaNV().trim().equals(maNV.trim())){
+                luongCB = StoreData.dsNV.get(i).getLuongCoBan();
             }
         }
         lbLuongCoBan.setText(Integer.toString(luongCB));

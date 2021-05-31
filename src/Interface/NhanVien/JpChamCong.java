@@ -23,8 +23,6 @@ import javax.swing.JOptionPane;
 public class JpChamCong extends javax.swing.JPanel {
     String maNV;
     String ngay;
-    ArrayList<ChamCongDTO> listCC = new ArrayList<>();
-    ArrayList<LoaiNhanVienDTO> listLNV = new ArrayList<>();
     ConnectSQL con = new ConnectSQL();
     int selectedRow = -1;
     /**
@@ -39,26 +37,12 @@ public class JpChamCong extends javax.swing.JPanel {
         maNV = Run.account.getManv().trim();
         StoreData.dsCC = con.GetChamCongByID(maNV);
         loadData();
-        loadTable();
         dateNgayLV.setEnabled(false);
     }
     public void loadData() {
         tblLuong.setModel(new TableChamCong());
     }
     
-
-   
-    public void loadTable(){
-        listCC = con.GetChamCong();
-        if (listCC != null) {
-            int sotk = 0;
-            for (ChamCongDTO tk : listCC) {
-                sotk++;
-            }       
-        } else {
-            JOptionPane.showMessageDialog(null, "Internal Server Error !");
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,11 +163,7 @@ public class JpChamCong extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Đã chấm công ngày " + ngay + " thành công !!!");
             StoreData.dsCC = con.GetChamCongByID(maNV);
         }
-        else{
-            StoreData.dsCC = con.GetChamCongByID(maNV);
-        }
         loadData();
-        loadTable();
     }//GEN-LAST:event_btnChamCongActionPerformed
 
 

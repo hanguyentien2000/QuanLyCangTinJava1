@@ -8,6 +8,7 @@ package Interface.Thongke;
 import CustomTable.TableHoaDon;
 import Models.HoaDonDTO;
 import SQLConnect.ConnectSQL;
+import Store.StoreData;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -20,7 +21,6 @@ import javax.swing.JOptionPane;
 public class JpThongKeHoaDon extends javax.swing.JPanel {
 
     ConnectSQL con = new ConnectSQL();
-    ArrayList<HoaDonDTO> listHd = con.GetAllHD();
     ArrayList<HoaDonDTO> listHDsorted = new ArrayList<>();
     int maHD, maBan, selectedRow, tongTien;
     String gioDen;
@@ -31,13 +31,10 @@ public class JpThongKeHoaDon extends javax.swing.JPanel {
      */
     public JpThongKeHoaDon() {
         initComponents();
-        loadTable();
+        StoreData.dsHD = con.GetAllHD();
         loadCombo();
     }
 
-    public void loadTable() {
-        tblHoaDon.setModel(new TableHoaDon(listHd));
-    }
     
     public void loadCombo()
     {
@@ -303,19 +300,19 @@ public class JpThongKeHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
         listHDsorted = new ArrayList<>();
         if(cbxTrangThai.getSelectedItem().equals("Đã thanh toán")){
-            for(int i=0; i<listHd.size(); i++){
-                if(listHd.get(i).getTrangThai().equals(true))
-                    listHDsorted.add(listHd.get(i));
+            for(int i=0; i<StoreData.dsHD.size(); i++){
+                if(StoreData.dsHD.get(i).getTrangThai().equals(true))
+                    listHDsorted.add(StoreData.dsHD.get(i));
             }
         }
         else if(cbxTrangThai.getSelectedItem().equals("Chưa thanh toán")){
-            for(int i=0; i<listHd.size(); i++){
-                if(listHd.get(i).getTrangThai().equals(false))
-                    listHDsorted.add(listHd.get(i));
+            for(int i=0; i<StoreData.dsHD.size(); i++){
+                if(StoreData.dsHD.get(i).getTrangThai().equals(false))
+                    listHDsorted.add(StoreData.dsHD.get(i));
             }
         }
         else
-            listHDsorted = listHd;
+            listHDsorted = StoreData.dsHD;
         tblHoaDon.setModel(new TableHoaDon(listHDsorted));
     }//GEN-LAST:event_cbxTrangThaiItemStateChanged
 
