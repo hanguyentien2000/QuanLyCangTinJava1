@@ -35,7 +35,7 @@ public class JpDoAn extends javax.swing.JPanel {
     public Timestamp gioden;
     public String tenban;
     public int maban;
-//    public ArrayList<MonAnDTO> arrdsmon;
+
     ArrayList<MonAnDTO> arrThucDon;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
     public static JpDoAn td = new JpDoAn();

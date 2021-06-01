@@ -58,6 +58,12 @@ public class DLQL_ThemBan extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Tên bàn:");
 
+        txtTenBan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTenBanKeyReleased(evt);
+            }
+        });
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -147,21 +153,17 @@ public class DLQL_ThemBan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        // TODO add your handling code here:
-        String regexVietnamese = "^[a-zA-Z0-9_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ"
-                + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ"
-                + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$";
         try {
             if (txtTenBan.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Tên bàn không được để trống !");
                 return;
             }
-            if (!txtTenBan.getText().trim().matches(regexVietnamese)) {
-                JOptionPane.showMessageDialog(null, "Tên bàn không được chứa kí tự đặc biệt");
+            if (!txtTenBan.getText().trim().contains(" ")){
+                txtTenBan.setText("Bàn ");
+                JOptionPane.showMessageDialog(null, "Tên bàn phải có ít nhất 2 từ !");
                 return;
             }
             BanDTO ban = new BanDTO();
-//        ban.SetMaBan(StoreData.currentBan.GetMaBan());
             ban.SetTenBan(txtTenBan.getText());
             ban.SetTrangThai("Trống");
             con.InsertBan(ban);
@@ -173,7 +175,7 @@ public class DLQL_ThemBan extends javax.swing.JDialog {
 
             this.dispose();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Create failed");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_btnXacNhanActionPerformed
@@ -182,6 +184,11 @@ public class DLQL_ThemBan extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void txtTenBanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenBanKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtTenBanKeyReleased
 
     /**
      * @param args the command line arguments

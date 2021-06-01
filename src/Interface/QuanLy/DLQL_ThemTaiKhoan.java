@@ -217,7 +217,7 @@ public class DLQL_ThemTaiKhoan extends javax.swing.JDialog {
                 return;
             }
             if (con.CheckExistUsernameAccount(txtTenTaiKhoan.getText()) != null) {
-                JOptionPane.showMessageDialog(null, "Tên tài khoản này đã được sử dụng! !");
+                JOptionPane.showMessageDialog(null, "Tên tài khoản này đã được sử dụng!");
                 return;
             }
             TaiKhoanDTO tk = new TaiKhoanDTO();

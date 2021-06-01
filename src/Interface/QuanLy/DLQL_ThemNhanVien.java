@@ -10,7 +10,6 @@ import Models.NhanVienDTO;
 import SQLConnect.ConnectSQL;
 import Store.StoreData;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -322,7 +321,7 @@ public class DLQL_ThemNhanVien extends javax.swing.JDialog {
                     - new Date(dateNgaysinh.getSelectedDate().getTimeInMillis() - dateNgaysinh.getSelectedDate().getTimeInMillis()).getYear(); //70
 
             if (tuoi < 18) {
-                throw new Exception("Nhân viên phải đạt 18 tuổi trở lên");
+                throw new Exception("Nhân viên phải đạt 18 tuổi trở lên!");
             }
 
             NhanVienDTO nv = new NhanVienDTO();

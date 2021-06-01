@@ -6,7 +6,6 @@
 package Interface.QuanLy;
 
 import CustomTable.TableBan;
-import Interface.Run;
 import Models.BanDTO;
 import SQLConnect.ConnectSQL;
 import Store.StoreData;

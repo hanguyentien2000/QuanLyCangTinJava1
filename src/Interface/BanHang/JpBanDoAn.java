@@ -45,7 +45,8 @@ public final class JpBanDoAn extends javax.swing.JPanel {
                 //Button Bàn
                 btn[i] = new JButton();
                 btn[i].setName(String.valueOf(arrBan.get(i).GetMaBan()));
-                String[] mb = arrBan.get(i).GetTenBan().split(" "); 
+                String[] mb = arrBan.get(i).GetTenBan().split(" ");
+                
                 btn[i].setText(mb[1]);
                 btn[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Images/ico-Table.png")));
                 Border thickBorder = new LineBorder(Color.WHITE,8);

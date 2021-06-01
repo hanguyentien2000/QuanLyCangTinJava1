@@ -63,7 +63,7 @@ public class JpQuanLyNhanVien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error get list !");
         }
     }
-    
+
     public void fillCombo() {
         try {
             cbbLoaiNV = con.GetAllLoaiNV();
@@ -76,6 +76,7 @@ public class JpQuanLyNhanVien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Không LOAD được combo Loại Nhân Viên");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,32 +274,30 @@ public class JpQuanLyNhanVien extends javax.swing.JPanel {
 
     private void cbxLoaiNVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxLoaiNVItemStateChanged
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_cbxLoaiNVItemStateChanged
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        try{
-        if (selectedRow < 0) {
-            throw new Exception("Phải chọn dòng trước khi xoá");
-        } else {
-            int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá thông tin này ?", "Thông báo", JOptionPane.YES_NO_OPTION);
-            if (kq == 0) {
-                ArrayList<ChamCongDTO> listCCByMaNV = new ArrayList<>();
-                listCCByMaNV = con.GetChamCongByID(StoreData.currentNhanVien.getMaNV());
-                if(listCCByMaNV.size() == 0){
-                con.DeleteNhanVien(StoreData.currentNhanVien.getMaNV());
-                loadData();
-                }
-                else{
-                    throw new Exception("Nhân viên này chưa thanh toán hết lương !!!!");
-                }
+        try {
+            if (selectedRow < 0) {
+                throw new Exception("Phải chọn dòng trước khi xoá");
             } else {
+                int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá thông tin này ?", "Thông báo", JOptionPane.YES_NO_OPTION);
+                if (kq == 0) {
+                    ArrayList<ChamCongDTO> listCCByMaNV = new ArrayList<>();
+                    listCCByMaNV = con.GetChamCongByID(StoreData.currentNhanVien.getMaNV());
+                    if (listCCByMaNV.size() == 0) {
+                        con.DeleteNhanVien(StoreData.currentNhanVien.getMaNV());
+                        loadData();
+                    } else {
+                        throw new Exception("Nhân viên này chưa thanh toán hết lương !!!!");
+                    }
+                } else {
+                }
+                selectedRow = -1;
             }
-            selectedRow = -1;
-        }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnXoaActionPerformed
